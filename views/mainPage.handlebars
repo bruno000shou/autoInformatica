@@ -1,11 +1,51 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>autoInformatica</title>
 </head>
-<body>
-    <h1>mainPage</h1>
+<body > 
+    
+
+<div class="bg-dark text-light">
+     <!-- Navbar simples -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-secondary mb-4">
+        <div class="container">
+        <a class="navbar-brand" href="/">Utilize os botões abaixo para interagir com o sistema</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="row">
+        <!-- Coluna da esquerda com botões -->
+        <div class="col-md-4 mb-5">
+            <div class="d-grid gap-3">
+            <button onclick="window.location.href='/ordemServico'" class="btn btn-primary btn-lg">Ordem de Serviço</button>
+            <button onclick="window.location.href='/caixa'" class="btn btn-primary btn-lg">Caixa</button>
+            <button onclick="window.location.href='/recibo'" class="btn btn-primary btn-lg">Recibos</button>
+            <button onclick="window.location.href='/cliente'" class="btn btn-primary btn-lg">Clientes</button>
+            <button onclick="window.location.href='/agenda'" class="btn btn-primary btn-lg">Agenda</button>
+            <button onclick="window.location.href='/produto'" class="btn btn-primary btn-lg">Produtos</button>
+            </div>
+        </div>
+        <div class="card bg-secondary text-light mb-5 ms-5" style="max-width: 50rem;">
+            <div class="card-body">
+                <h5 class="card-title">Avisos</h5>
+                <p class="card-text">Exemplo de aviso de sistema!!!</p>
+            </div>
+        </div>
+      
+        
+    </div>
+
+  <!-- Bootstrap JS -->
+  <script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
+</div>
+
+
+
+
+
 </body>
 </html>

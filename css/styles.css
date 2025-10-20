@@ -1,0 +1,38 @@
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #121212; /* fundo escuro suave */
+  color: #e0e0e0;            /* texto suave */
+}
+
+a {
+  color: #90caf9;
+}
+
+a:hover {
+  color: #64b5f6;
+}
+
+.card {
+  border-radius: 12px;
+  border: none;
+  background-color: #1e1e1e;
+}
+
+/* Botões grandes e consistentes */
+.btn-primary {
+  background-color: #1976d2;
+  border: none;
+}
+
+.btn-primary:hover {
+  background-color: #1565c0;
+}
+
+/* Área de alertas à direita */
+#alertas-sistema {
+  background-color: #1e1e1e;
+  padding: 20px;
+  border-radius: 12px;
+  min-height: 150px; /* ajustável */
+  margin-bottom: 20px;
+}
