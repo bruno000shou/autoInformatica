@@ -1,11 +1,89 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>produto</title>
-</head>
+
 <body>
-    <h1 class="">ESTÁ É A PAGINA DE PRODUTOS</h1>
+  <div class="bg-dark text-light min-vh-100 d-flex flex-column overflow-hidden">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-secondary mb-4">
+      <div class="container">
+        <a class="navbar-brand" href="/">Produtos</a>
+      </div>
+    </nav>
+
+    <div class="container flex-grow-1">
+      <div class="row g-4">
+        <!-- Coluna 1: Cadastro de produtos -->
+        <div class="col-md-3">
+          <div class="card bg-secondary text-light ">
+            <div class="card-body">
+              <h5 class="card-title mb-2">Cadastro de Produto</h5>
+              <form>
+                <div class="mb-1">
+                  <label class="form-label">Nome</label>
+                  <input type="text" class="form-control" placeholder="Nome do produto">
+                </div>
+                <div class="mb-1">
+                  <label class="form-label">Valor</label>
+                  <input type="number" step="0.01" class="form-control" placeholder="0,00">
+                </div>
+                <div class="mb-1">
+                  <label class="form-label">Descrição</label>
+                  <textarea class="form-control" rows="2" placeholder="Descrição curta"></textarea>
+                </div>
+                <div class="mb-1">
+                  <label class="form-label">Quantidade Existente no Estoque</label>
+                  <input type="number" class="form-control" placeholder="0">
+                </div>
+                <div class="mb-1">
+                  <label class="form-label">Quantidade Mínima</label>
+                  <input type="number" class="form-control" placeholder="0">
+                </div>
+                <button type="submit" class="btn btn-primary w-100 mt-2">Salvar</button>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <!-- Coluna 2: Ações e pesquisa -->
+        <div class="col-md-3 d-flex flex-column">
+          <div class="card bg-secondary text-light mb-8 flex-grow-1">
+            <div class="card-body d-flex flex-column">
+              <h6 class="card-title mb-3">Ações</h6>
+              <button class="btn btn-info mb-3">Listar Compras</button>
+              <button class="btn btn-success mb-4">Imprimir Compras</button>
+
+              <h6 class="card-title mb-3">Pesquisar Produto</h6>
+              <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Digite o nome do produto">
+                <button class="btn btn-primary">Pesquisar</button>
+              </div>
+
+              <div class="mt-auto mb-2">
+                <button class="btn btn-secondary w-100" onclick="window.location.href='/'">Voltar à Página Inicial</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Coluna 3: Resultados da pesquisa -->
+        <div class="col-md-6">
+          <div class="card bg-secondary text-light h-100 d-flex flex-column">
+            <div class="card-body d-flex flex-column">
+              <h3 class="card-title mb-1">Pesquisa de Produtos</h3>
+              <div class="flex-grow-1 overflow-auto" style="min-height: 380px;">
+                <!-- Aqui serão exibidos os resultados da pesquisa -->
+                <p>Nenhum produto encontrado.</p>
+              </div>
+              <div class="d-flex gap-2 mt-3">
+                <button class="btn btn-warning w-50">Editar</button>
+                <button class="btn btn-danger w-50">Deletar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
 </body>
-</html>
+

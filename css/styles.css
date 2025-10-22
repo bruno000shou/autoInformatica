@@ -2,6 +2,8 @@ body {
   font-family: 'Segoe UI', sans-serif;
   background-color: #121212; /* fundo escuro suave */
   color: #e0e0e0;            /* texto suave */
+  height: 100%;
+  overflow: hidden;
 }
 
 a {
@@ -28,6 +30,15 @@ a:hover {
   background-color: #1565c0;
 }
 
+.btn-info {
+  background-color: #0288d1;
+  border: none;
+}
+
+.btn-info:hover {
+  background-color: #0277bd;
+}
+
 /* Área de alertas à direita */
 #alertas-sistema {
   background-color: #1e1e1e;
@@ -36,3 +47,4 @@ a:hover {
   min-height: 150px; /* ajustável */
   margin-bottom: 20px;
 }
+

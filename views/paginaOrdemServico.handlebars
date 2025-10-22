@@ -1,11 +1,88 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ordemServico</title>
-</head>
+
+{{!Ordem de servico - formulario para criar, pesquisar e alterar ordens de servico}}
 <body>
-    <h1 class="">ESTÁ É A PAGINA DE ORDEM DE SERVIÇO</h1>
+  <div class="bg-dark text-light min-vh-100">
+    <!-- Navbar -->
+    
+
+    <div class="container mt-3">
+      <!-- Formulário de Ordem de Serviço -->
+      <div class="card bg-secondary text-light mb-1 mt-1">
+        <div class="card-body">
+        
+          <!-- Linha de pesquisa -->
+          <div class="row">
+            <div class="col-md-10 mb-3">
+               <h4 class="card-title mb-1 mt-1 ms-3 text-info">Pesquisa de Clientes</h4>
+              <input type="text" class="form-control mt-3" placeholder="Pesquisar cliente...">
+            </div>
+            <div class="col-md-2 mt-5">
+              <button class="btn btn-primary w-100">Pesquisar</button>
+            </div>
+          </div>
+
+          <nav class="navbar navbar-expand-lg navbar-dark bg-secondary">
+            <div class="container">
+              <h4 class="card-title mb-2 text-info">Cadastro de Ordem de Serviço</h4>
+            </div>
+          </nav>
+
+          <!-- Linhas do formulário -->
+          <form>
+            <div class="row mb-1">
+              <div class="col-md-6">
+                <label class="form-label">Nome do Cliente</label>
+                <input type="text" class="form-control" placeholder="Digite o nome do cliente">
+              </div>
+              <div class="col-md-3">
+                <label class="form-label">Telefone 1</label>
+                <input type="text" class="form-control" placeholder="(xx) xxxxx-xxxx">
+              </div>
+              <div class="col-md-3">
+                <label class="form-label">Telefone 2</label>
+                <input type="text" class="form-control" placeholder="(xx) xxxxx-xxxx">
+              </div>
+            </div>
+            <div class="row mb-1">
+              <div class="col-md-6">
+                <label class="form-label">Equipamento Deixado</label>
+                <input type="text" class="form-control" placeholder="Ex: Notebook, Impressora...">
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Defeito Reclamado</label>
+                <input type="text" class="form-control" placeholder="Descreva o problema relatado">
+              </div>
+            </div>
+            <div class="row mb-1">
+              <div class="col-md-4">
+                <label class="form-label">Data de Entrada</label>
+                <input type="date" class="form-control">
+              </div>
+              <div class="col-md-8">
+                <label class="form-label">Valor do Serviço (R$)</label>
+                <input type="number" step="0.01" class="form-control" placeholder="0,00">
+              </div>
+            </div>
+            <div class="row mb-1">
+              <div class="col-md-12">
+                <label class="form-label">Observações Detalhadas</label>
+                <textarea class="form-control" rows="4" placeholder="Digite aqui as observações detalhadas..."></textarea>
+              </div>
+            </div>
+            <!-- Botões -->
+            <div class="d-flex justify-content-between">
+              <button type="button" class="btn btn-secondary" onclick="window.location.href='/'">Voltar</button>
+              <div>
+                <button type="button" class="btn btn-info me-2">Imprimir</button>
+                <button type="submit" class="btn btn-primary">Salvar</button>
+              </div>
+            </div>
+          </form>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
 </body>
-</html>
