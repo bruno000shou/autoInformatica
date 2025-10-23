@@ -1,88 +1,98 @@
-
-{{!Ordem de servico - formulario para criar, pesquisar e alterar ordens de servico}}
 <body>
-  <div class="bg-dark text-light min-vh-100">
+  <div class="bg-dark text-light min-vh-100 d-flex flex-column">
+
     <!-- Navbar -->
-    
+    <nav class="navbar navbar-expand-lg navbar-dark bg-secondary mb-3">
+      <div class="container">
+        <a class="navbar-brand" href="/">Ordem de Serviço</a>
+      </div>
+    </nav>
 
-    <div class="container mt-3">
-      <!-- Formulário de Ordem de Serviço -->
-      <div class="card bg-secondary text-light mb-1 mt-1">
-        <div class="card-body">
-        
-          <!-- Linha de pesquisa -->
-          <div class="row">
-            <div class="col-md-10 mb-3">
-               <h4 class="card-title mb-1 mt-1 ms-3 text-info">Pesquisa de Clientes</h4>
-              <input type="text" class="form-control mt-3" placeholder="Pesquisar cliente...">
-            </div>
-            <div class="col-md-2 mt-5">
-              <button class="btn btn-primary w-100">Pesquisar</button>
-            </div>
-          </div>
+    <div class="container flex-grow-1">
+      <div class="row g-4">
 
-          <nav class="navbar navbar-expand-lg navbar-dark bg-secondary">
-            <div class="container">
-              <h4 class="card-title mb-2 text-info">Cadastro de Ordem de Serviço</h4>
-            </div>
-          </nav>
-
-          <!-- Linhas do formulário -->
-          <form>
-            <div class="row mb-1">
-              <div class="col-md-6">
-                <label class="form-label">Nome do Cliente</label>
+        <!-- Coluna 1: Ordem de Serviço -->
+        <div class="col-md-4">
+          <div class="card bg-secondary text-light h-100 p-3" style="max-width:400px;">
+            <form>
+              <div class="mb-3">
+                <label class="form-label">Nome</label>
                 <input type="text" class="form-control" placeholder="Digite o nome do cliente">
               </div>
-              <div class="col-md-3">
+              <div class="mb-3">
                 <label class="form-label">Telefone 1</label>
                 <input type="text" class="form-control" placeholder="(xx) xxxxx-xxxx">
               </div>
-              <div class="col-md-3">
+              <div class="mb-3">
                 <label class="form-label">Telefone 2</label>
                 <input type="text" class="form-control" placeholder="(xx) xxxxx-xxxx">
               </div>
-            </div>
-            <div class="row mb-1">
-              <div class="col-md-6">
+              <div class="mb-3">
                 <label class="form-label">Equipamento Deixado</label>
                 <input type="text" class="form-control" placeholder="Ex: Notebook, Impressora...">
               </div>
-              <div class="col-md-6">
+            </form>
+          </div>
+        </div>
+
+        <!-- Coluna 2: Ordem de Serviço + Pesquisa + Botão salvar -->
+        <div class="col-md-4">
+          <div class="card bg-secondary text-light h-100 p-3" style="max-width:400px;">
+            <form>
+              <div class="mb-3">
                 <label class="form-label">Defeito Reclamado</label>
                 <input type="text" class="form-control" placeholder="Descreva o problema relatado">
               </div>
-            </div>
-            <div class="row mb-1">
-              <div class="col-md-4">
+              <div class="mb-3">
                 <label class="form-label">Data de Entrada</label>
                 <input type="date" class="form-control">
               </div>
-              <div class="col-md-8">
+              <div class="mb-3">
                 <label class="form-label">Valor do Serviço (R$)</label>
                 <input type="number" step="0.01" class="form-control" placeholder="0,00">
               </div>
-            </div>
-            <div class="row mb-1">
-              <div class="col-md-12">
+              <div class="mb-3">
                 <label class="form-label">Observações Detalhadas</label>
-                <textarea class="form-control" rows="4" placeholder="Digite aqui as observações detalhadas..."></textarea>
+                <textarea class="form-control" rows="3" placeholder="Digite aqui as observações detalhadas..."></textarea>
               </div>
-            </div>
-            <!-- Botões -->
-            <div class="d-flex justify-content-between">
-              <button type="button" class="btn btn-secondary" onclick="window.location.href='/'">Voltar</button>
-              <div>
-                <button type="button" class="btn btn-info me-2">Imprimir</button>
-                <button type="submit" class="btn btn-primary">Salvar</button>
+
+              <!-- Botão Saltar -->
+              <div class="mb-3">
+                <button type="button" class="btn btn-primary w-100">Salvar</button>
               </div>
-            </div>
-          </form>
-          
+
+              <!-- Pesquisa de Cliente -->
+              <div class="input-group mt-3">
+                <input type="text" class="form-control" placeholder="Pesquisar cliente...">
+                <button class="btn btn-primary">Pesquisar</button>
+              </div>
+            </form>
+          </div>
         </div>
+
+        <!-- Coluna 3: Resultados da Pesquisa + Botão Voltar -->
+        <div class="col-md-4 card-2">
+          <div class="card bg-secondary text-light h-100 p-3" style="max-width:400px; height:100%;">
+            <h5 class="text-info mb-3">Resultados da Pesquisa</h5>
+            <div id="searchResults" class="flex-grow-1 overflow-auto" style="height: calc(100% - 110px);">
+              <!-- Aqui aparecerão os resultados das ordens de serviço -->
+              <p>Nenhum resultado selecionado.</p>
+            </div>
+            <!-- Botões de ação -->
+            <div class="d-flex justify-content-between mt-3">
+              <button class="btn btn-danger">Deletar</button>
+              <button class="btn btn-warning">Editar</button>
+              <button class="btn btn-info">Imprimir</button>
+            </div>
+
+            <!-- Botão Voltar -->
+            <div class="mt-3">
+              <button class="btn btn-dark w-100" onclick="window.location.href='/'">Voltar à Página Inicial</button>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
   </div>
-
-  <script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
 </body>
