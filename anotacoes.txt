@@ -6,4 +6,5 @@ PAGINA CAIXA
 
     importante:
 
-    ver se o conteudo do services ainda e relevante, eu acho que nao. 
+
+    tornar todo o conteudo do routers um modulo de services
