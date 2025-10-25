@@ -6,5 +6,7 @@ PAGINA CAIXA
 
     importante:
 
+    ver o arquivo supabase, esta fazendo a verificacao de erro do numero de teelfone, e envioou para o front como um json. 
+    mas precisa agroa ver no front como vai pegar esse json e tratar isso. 
 
     tornar todo o conteudo do routers um modulo de services

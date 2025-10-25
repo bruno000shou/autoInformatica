@@ -9,6 +9,15 @@
     </nav>
 
     <div class="container flex-grow-1">
+      {{!A div para enviar a mensagem de erro sobre o telefone  para a tela }}
+      {{#if erro}}
+        <div id="modalErro" class="modal">
+          <div class="modal-content">
+            <p>{{mensagem}}</p>
+            <button id="btnFecharModal">OK</button>
+          </div>
+        </div>
+      {{/if}}
       <!-- Form principal envolvendo todas as colunas -->
       <form id="formOrdemServicoCompleto" action="/ordemServico" method="POST">
         <div class="row g-4">
@@ -18,19 +27,19 @@
             <div class="card bg-secondary text-light h-100 p-3" style="max-width:400px;">
               <div class="mb-3">
                 <label class="form-label">Nome</label>
-                <input type="text" name="nomeNome" class="form-control" placeholder="Digite o nome do cliente">
+                <input type="text" name="nomeNome" class="form-control" placeholder="Digite o nome do cliente" value="{{valores.nome}}">
               </div>
               <div class="mb-3">
                 <label class="form-label">Telefone 1</label>
-                <input type="text" name="nomeTelefoneUm" class="form-control" placeholder="(xx) xxxxx-xxxx">
+                <input type="text" name="nomeTelefoneUm" class="form-control" placeholder="(xx) xxxxx-xxxx" value="{{valores.telefoneUm}}">
               </div>
               <div class="mb-3">
                 <label class="form-label">Telefone 2</label>
-                <input type="text" name="nomeTelefoneDois" class="form-control" placeholder="(xx) xxxxx-xxxx">
+                <input type="text" name="nomeTelefoneDois" class="form-control" placeholder="(xx) xxxxx-xxxx" value="{{valores.telefoneDois}}">
               </div>
               <div class="mb-3">
                 <label class="form-label">Equipamento Deixado</label>
-                <input type="text" name="nomeEquipamento" class="form-control" placeholder="Ex: Notebook, Impressora...">
+                <input type="text" name="nomeEquipamento" class="form-control" placeholder="Ex: Notebook, Impressora..." value="{{valores.equipamento}}">
               </div>
             </div>
           </div>
@@ -40,19 +49,19 @@
             <div class="card bg-secondary text-light h-100 p-3" style="max-width:400px;">
               <div class="mb-3">
                 <label class="form-label">Defeito Reclamado</label>
-                <input type="text" name="nomeDefeito" class="form-control" placeholder="Descreva o problema relatado">
+                <input type="text" name="nomeDefeito" class="form-control" placeholder="Descreva o problema relatado" value="{{valores.nome}}">
               </div>
               <div class="mb-3">
                 <label class="form-label">Data de Entrada</label>
-                <input type="date" name="nomeDataEntrada" class="form-control">
+                <input type="date" name="nomeDataEntrada" class="form-control" value="{{valores.dataEntrada}}">
               </div>
               <div class="mb-3">
                 <label class="form-label">Valor do Serviço (R$)</label>
-                <input type="number" name="nomeValor" step="0.01" class="form-control" placeholder="0,00">
+                <input type="number" name="nomeValor" step="0.01" class="form-control" placeholder="0,00" value="{{valores.valor}}">
               </div>
               <div class="mb-3">
                 <label class="form-label">Observações Detalhadas</label>
-                <textarea name="nomeObservacoes" class="form-control" rows="3" placeholder="Digite aqui as observações detalhadas..."></textarea>
+                <textarea name="nomeObservacoes" class="form-control" rows="3" placeholder="{{#if valores.observacao}}{{valores.observacao}}{{else}}Digite aqui as observações detalhadas...{{/if}}"></textarea>
               </div>
 
               <!-- Botão Submit -->
@@ -94,6 +103,19 @@
       </form>
     </div>
   </div>
-</body>
+  
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const modal = document.getElementById("modalErro");
+  const btnFechar = document.getElementById("btnFecharModal");
 
+  if (modal && btnFechar) {
+    btnFechar.addEventListener("click", () => {
+      modal.style.display = "none"; // esconde o modal
+    });
+  }
+});
+</script>
+
+</body>
 

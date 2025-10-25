@@ -12,22 +12,23 @@ async function postOrdemServico(req, res) {
         telefoneDois: valTelefone.validarTelefone(req.body.nomeTelefoneDois),
         equipamento: req.body.nomeEquipamento,
         defeito: req.body.nomeDefeito,
-        dataEntrada: req.body.nomeDataEntrada,
-        valor: req.body.nomeValor,
+        //coloca no valor data a data atual tratada caso o valor do body seja vazio
+        dataEntrada: req.body.nomeDataEntrada || new Date().toISOString().split('T')[0],
+        valor: req.body.nomeValor || 0,
         observacao: req.body.nomeObservacoes
     };
                 console.log(data.telefoneUm, data.telefoneDois, typeof(data.telefoneUm), typeof(data.telefoneDois))
 
     try {
-        //Validação de telefone
+        //Validação de telefone enviando json para o front caso haja erro
         if (data.telefoneUm === "00000000000" || data.telefoneDois === "00000000000") {  
             console.log('Houveram erros nos telefones e o banco de dados não foi alcançado');  
-            return res.status(400).json({
-                erro: true,
-                mensagem: 'Telefone inválido — verifique os números informados.'
-            });
+            return res.render('paginaOrdemServico', {
+                erro:true,
+                mensagem: 'Telefone inválido - verifique os números informados',
+                valores:data
+            })
         } 
-
         // Inserção no banco
         const { data: resultado, error } = await supabase
             .from('ordemServico')
@@ -37,7 +38,6 @@ async function postOrdemServico(req, res) {
             console.error('Erro ao inserir dados no Supabase', error);
             return res.status(500).send('Erro ao salvar no banco de dados');
         }
-
         console.log('Registro inserido no banco de dados com sucesso', data);
         return res.redirect('/ordemServico'); // só chega aqui se estiver tudo ok
 
