@@ -25,4 +25,6 @@ ser operado por pessoas que não tem muita experiencia com operação de sistema
     ordemServico: nome:string, telefoneUm:bigint, telefoneDoi:bigint, equipamento:text, defeito:text, dataEntrada:date, 
     valorfloat4, observacao:text.
 
+    clientes: nome:text, telefoneUm:text, telefoneDois:text
+
 

@@ -22,12 +22,12 @@ async function postOrdemServico(req, res) {
     try {
         //Validação de telefone enviando json para o front caso haja erro
         if (data.telefoneUm === "00000000000" || data.telefoneDois === "00000000000") {  
-            console.log('Houveram erros nos telefones e o banco de dados não foi alcançado');  
+            console.log('Houveram erros nos telefones e o banco de dados não foi alcançado');
             return res.render('paginaOrdemServico', {
                 erro:true,
                 mensagem: 'Telefone inválido - verifique os números informados',
                 valores:data
-            })
+            });
         } 
         // Inserção no banco
         const { data: resultado, error } = await supabase

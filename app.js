@@ -14,6 +14,7 @@ app.locals.supabase = supabase;
 //importando css e bootstrap para o app
 app.use('/bootstrap', express.static(__dirname+'/node_modules/bootstrap/dist'));
 app.use('/css', express.static(__dirname+'/css'));
+app.use(express.static('public'));
 
 //indicando que usaremos json nesse app
 app.use(express.json());
