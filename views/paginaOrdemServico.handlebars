@@ -1,150 +1,136 @@
-<body>
-  <div class="bg-dark text-light min-vh-100 d-flex flex-column">
+  <body>
+    <div class="bg-dark text-light min-vh-100 d-flex flex-column">
 
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-secondary mb-3">
-      <div class="container">
-        <a class="navbar-brand" href="/">Ordem de Serviço</a>
-      </div>
-    </nav>
+      <!-- Navbar -->
+      <nav class="navbar navbar-expand-lg navbar-dark bg-secondary mb-3">
+        <div class="container">
+          <a class="navbar-brand" href="/">Ordem de Serviço</a>
+        </div>
+      </nav>
 
-    <div class="container flex-grow-1">
+      <div class="container flex-grow-1">
 
-      {{#if erro}}
-      <div id="modalErro" class="position-fixed top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center"
-        style="background-color: rgba(0,0,0,0.5); z-index: 1050;">
-        <div class="modal-dialog modal-dialog-centered" style="max-width: 400px;">
-          <div class="modal-content bg-danger text-white border-0 shadow-lg">
-            <div class="modal-header d-flex justify-content-between align-items-center">
-              <h5 class="modal-title mb-0">Erro</h5>
-              <button type="button" class="btn btn-light btn-sm fw-bold" id="btnFecharModalX">X</button>
-            </div>
-            <div class="modal-body">
-              <p class="mb-0">{{mensagem}}</p>
-            </div>
-            <div class="modal-footer border-0 d-flex justify-content-end">
-              <button type="button" class="btn btn-light" id="btnFecharModalOk">OK</button>
+        {{#if erro}}
+        <div id="modalErro" class="position-fixed top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center"
+          style="background-color: rgba(0,0,0,0.5); z-index: 1050;">
+          <div class="modal-dialog modal-dialog-centered" style="max-width: 400px;">
+            <div class="modal-content bg-danger text-white border-0 shadow-lg">
+              <div class="modal-header d-flex justify-content-between align-items-center">
+                <h5 class="modal-title mb-0">Erro</h5>
+                <button type="button" class="btn btn-light btn-sm fw-bold" id="btnFecharModalX">X</button>
+              </div>
+              <div class="modal-body">
+                <p class="mb-0">{{mensagem}}</p>
+              </div>
+              <div class="modal-footer border-0 d-flex justify-content-end">
+                <button type="button" class="btn btn-light" id="btnFecharModalOk">OK</button>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <script src="/js/modal.js"></script>
-      {{/if}}
+        <script src="/js/modal.js"></script>
+        {{/if}}
 
-      <!-- Linha principal com 3 colunas de mesma altura -->
-      <div class="row g-4 d-flex align-items-stretch">
+        <!-- Linha principal com 3 colunas de mesma altura -->
+        <div class="row g-4 d-flex align-items-stretch">
 
-        <!-- Formulário principal: Ordem de Serviço -->
-        <div class="col-md-8">
-          <form id="formOrdemServicoCompleto" action="/ordemServico" method="POST">
-            <div class="row g-4 d-flex align-items-stretch">
+          <!-- Formulário principal: Ordem de Serviço -->
+          <div class="col-md-8">
+            <form id="formOrdemServicoCompleto" action="/ordemServico" method="POST">
+              <div class="row g-4 d-flex align-items-stretch">
 
-              <!-- Coluna 1: Dados do cliente -->
-              <div class="col-md-6">
-                <div class="card bg-secondary text-light h-100 p-3">
-                  <div class="mb-3">
-                    <label class="form-label">Nome</label>
-                    <input type="text" name="nomeNome" class="form-control"
-                      placeholder="Digite o nome do cliente" value="{{valores.nome}}">
+                <!-- Coluna 1: Dados do cliente -->
+                <div class="col-md-6">
+                  <div class="card bg-secondary text-light h-100 p-3">
+                    <div class="mb-3">
+                      <label class="form-label">Nome</label>
+                      <input type="text" name="nomeNome" class="form-control"
+                        placeholder="Digite o nome do cliente" value="{{valores.nome}}">
+                    </div>
+                    <div class="mb-3">
+                      <label class="form-label">Telefone 1</label>
+                      <input type="text" name="nomeTelefoneUm" class="form-control"
+                        placeholder="(xx) xxxxx-xxxx" value="{{valores.telefoneUm}}">
+                    </div>
+                    <div class="mb-3">
+                      <label class="form-label">Telefone 2</label>
+                      <input type="text" name="nomeTelefoneDois" class="form-control"
+                        placeholder="(xx) xxxxx-xxxx" value="{{valores.telefoneDois}}">
+                    </div>
+                    <div class="mb-3">
+                      <label class="form-label">Equipamento Deixado</label>
+                      <input type="text" name="nomeEquipamento" class="form-control"
+                        placeholder="Ex: Notebook, Impressora..." value="{{valores.equipamento}}">
+                    </div>
                   </div>
-                  <div class="mb-3">
-                    <label class="form-label">Telefone 1</label>
-                    <input type="text" name="nomeTelefoneUm" class="form-control"
-                      placeholder="(xx) xxxxx-xxxx" value="{{valores.telefoneUm}}">
-                  </div>
-                  <div class="mb-3">
-                    <label class="form-label">Telefone 2</label>
-                    <input type="text" name="nomeTelefoneDois" class="form-control"
-                      placeholder="(xx) xxxxx-xxxx" value="{{valores.telefoneDois}}">
-                  </div>
-                  <div class="mb-3">
-                    <label class="form-label">Equipamento Deixado</label>
-                    <input type="text" name="nomeEquipamento" class="form-control"
-                      placeholder="Ex: Notebook, Impressora..." value="{{valores.equipamento}}">
+                </div>
+
+                <!-- Coluna 2: Ordem de Serviço + Observações -->
+                <div class="col-md-6">
+                  <div class="card bg-secondary text-light h-100 p-3">
+                    <div class="mb-3">
+                      <label class="form-label">Defeito Reclamado</label>
+                      <input type="text" name="nomeDefeito" class="form-control"
+                        placeholder="Descreva o problema relatado" value="{{valores.defeito}}">
+                    </div>
+                    <div class="mb-3">
+                      <label class="form-label">Data de Entrada</label>
+                      <input type="date" name="nomeDataEntrada" class="form-control"
+                        value="{{valores.dataEntrada}}">
+                    </div>
+                    <div class="mb-3">
+                      <label class="form-label">Valor do Serviço (R$)</label>
+                      <input type="number" name="nomeValor" step="0.01" class="form-control"
+                        placeholder="0,00" value="{{valores.valor}}">
+                    </div>
+                    <div class="mb-3">
+                      <label class="form-label">Observações Detalhadas</label>
+                      <textarea name="nomeObservacoes" class="form-control" rows="3"
+                        placeholder="{{#if valores.observacao}}{{valores.observacao}}{{else}}Digite aqui as observações detalhadas...{{/if}}"></textarea>
+                    </div>
+                    <div class="mb-3">
+                      <button type="submit" class="btn btn-primary w-100">Salvar</button>
+                    </div>
                   </div>
                 </div>
               </div>
+            </form>
+          </div>
 
-              <!-- Coluna 2: Ordem de Serviço + Observações -->
-              <div class="col-md-6">
-                <div class="card bg-secondary text-light h-100 p-3">
-                  <div class="mb-3">
-                    <label class="form-label">Defeito Reclamado</label>
-                    <input type="text" name="nomeDefeito" class="form-control"
-                      placeholder="Descreva o problema relatado" value="{{valores.defeito}}">
-                  </div>
-                  <div class="mb-3">
-                    <label class="form-label">Data de Entrada</label>
-                    <input type="date" name="nomeDataEntrada" class="form-control"
-                      value="{{valores.dataEntrada}}">
-                  </div>
-                  <div class="mb-3">
-                    <label class="form-label">Valor do Serviço (R$)</label>
-                    <input type="number" name="nomeValor" step="0.01" class="form-control"
-                      placeholder="0,00" value="{{valores.valor}}">
-                  </div>
-                  <div class="mb-3">
-                    <label class="form-label">Observações Detalhadas</label>
-                    <textarea name="nomeObservacoes" class="form-control" rows="3"
-                      placeholder="{{#if valores.observacao}}{{valores.observacao}}{{else}}Digite aqui as observações detalhadas...{{/if}}"></textarea>
-                  </div>
-
-                  <div class="mb-3">
-                    <button type="submit" class="btn btn-primary w-100">Salvar</button>
-                  </div>
+          <!-- Formulário separado: Pesquisa -->
+          <div class="col-md-4 d-flex">
+            <form id="formPesquisa" action="/api/ordemServico?search=true" method="GET" class="w-100">
+              <div class="card bg-secondary text-light h-100 p-3 d-flex flex-column">
+                <div class="input-group mb-3">
+                  <input type="text" id="pesquisaCliente" name="nomePesquisaCliente"
+                    class="form-control" placeholder="Pesquisar ordem de serviço/cliente">
+                  <button type="button" class="btn btn-primary" id="btnPesquisar">Pesquisar</button>
+                </div>
+                <h5 class="text-info mb-3">Resultados da Pesquisa</h5>
+                <div id="searchResultsContainer" class="overflow-auto border rounded bg-dark p-2" style="height: 300px; display: flex; flex-wrap: wrap;">
+                  <div id="searchResults"></div>
+                </div>
+                <div class="d-flex justify-content-between mt-3">
+                  <button type="button" class="btn btn-dark">Inserir</button>
+                  <button type="button" class="btn btn-warning">Editar</button>
+                  <button type="button" class="btn btn-info">Imprimir</button>
+                  <button type="button" class="btn btn-danger">Deletar</button>
+                </div>
+                <div class="mt-3">
+                  <button type="button" class="btn btn-dark w-100"
+                    onclick="window.location.href='/'">Voltar à Página Inicial</button>
                 </div>
               </div>
-            </div>
-          </form>
+            </form>
+          </div>
         </div>
 
-        <!-- Formulário separado: Pesquisa -->
-        <div class="col-md-4 d-flex">
-          <form id="formPesquisa" action="/api/ordemServico?search=true" method="GET" class="w-100">
-            <div class="card bg-secondary text-light h-100 p-3 d-flex flex-column">
-              <div class="input-group mb-3">
-                <input type="text" id="pesquisaCliente" name="nomePesquisaCliente"
-                  class="form-control" placeholder="Pesquisar ordem de serviço/cliente">
-                <button type="submit" class="btn btn-primary">Pesquisar</button>
-              </div>
-
-              <h5 class="text-info mb-3">Resultados da Pesquisa</h5>
-              <div id="searchResults" class="flex-grow-1 overflow-auto border rounded bg-dark p-2">
-                <div id="searchResults"></div>
-              </div>
-
-              <div class="d-flex justify-content-between mt-3">
-                <button type="button" class="btn btn-dark">Inserir</button>
-                <button type="button" class="btn btn-warning">Editar</button>
-                <button type="button" class="btn btn-info">Imprimir</button>
-                <button type="button" class="btn btn-danger">Deletar</button>
-              </div>
-
-              <div class="mt-3">
-                <button type="button" class="btn btn-dark w-100"
-                  onclick="window.location.href='/'">Voltar à Página Inicial</button>
-              </div>
-            </div>
-          </form>
-        </div>
       </div>
-
     </div>
-  </div>
+ 
+  {{!mensagem de erro ao digitar telefone com formato errado}}
+  <script src="/js/modal.js"></script>
+  {{!construcao de blocos na div de resultado da pesquisa e captura do valor de pesquisa}}
+  <script src="/js/osBlocks.js"></script>
 
-  <script src="/public/modal.js"></script>
-
-{{!  <script>
-    document.addEventListener('DOMContentLoaded', async () => {
-      const divSearchResults = document.getElementById('searchResults');
-      try {
-        const response = await fetch('/api/ordemServico');
-        const dados = await response.json();
-        console.log('JSON recebido do backend:', dados);
-        divSearchResults.textContent = JSON.stringify(dados, null, 2);
-      } catch (err) {
-        console.error('Erro no front end ao buscar o JSON:', err);
-      }
-    });
-  </script>}}
-</body>
+  </body>

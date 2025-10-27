@@ -1,15 +1,4 @@
-
-//document.addEventListener("DOMContentLoaded", () => {
-  //  const modal = document.getElementById("modalErro");
-    //const btnFechar = document.getElementById("btnFecharModal");
-
- //   if (modal && btnFechar) {
-   //     btnFechar.addEventListener("click", () => {
-     //   modal.style.display = "none"; // esconde o modal
-       // });
- //   }
-//}); 
-
+//responsavel por fechar o quadro de avisa de telefone errado
 
 window.addEventListener("load", () => {
   const modal = document.getElementById("modalErro");

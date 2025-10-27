@@ -6,7 +6,11 @@ PAGINA CAIXA
 
     importante:
 
+    ja esta funionando a captura de dados dentro do blocks, e armazenando na var divContentAll. Mas esta armazenando tudo,
+    a ideia e pegar o click pelo indice e pelo id. 
 
-    separi o end point, agora tem um especifico para enviar o json. POrem nao esta enviando, parece que tem que criar um evento
-    pra que ele seja enviado, tem que pesquisar isso. 
+   preciso fazer o botao inserir, onde vao preencher os dados da ordem de servico com o que esta nos qudrados. 
+
+   vou precisar de mais um botao de pesquisar os, esse botao vai pesquisar em outra tabela, a de os, e vai ter que renderizar
+    os ao invez de clientes, para usar com os botoes editar, deletar, e imprimir. 
     

@@ -11,6 +11,12 @@ ser operado por pessoas que não tem muita experiencia com operação de sistema
     Estamos usando o BOOTSTRAP no projeto, então seus templates estão como padrão, no diretório VIEWS.
 
 
+###PUBLIC/JS
+
+    Arquivo responsavel pelo controle do aviso de telefone errado na pagina de ordemServico
+
+
+
 ## BANCO DE DADOS
 
     Usaremos uma ferramenta gratuita que é o SUPABASE. Para um banco de dados relacional e gratis baseado em SQL. 
