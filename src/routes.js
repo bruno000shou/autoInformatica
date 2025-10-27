@@ -3,51 +3,56 @@ const router = express.Router();
 const { getFormData } = require('./services');
 const postOrdemServicoInst = require('./supabaseServices')
 
+//rota da pagina principal
 router.get('/', (req,res) => {
     res.render('mainPage')
 });
 
-
-
+// rota da pagina de ordem de servico
 router.get('/ordemServico',  async (req,res) => {
-    //verifica se pesquisa esta vazio
+    return res.render('paginaOrdemServico');
+});
+
+router.get('/api/ordemServico',  async (req,res) => {
     const pesquisa = req.query.nomePesquisaCliente;
-    if (!pesquisa) {
-        return res.render('paginaOrdemServico');
-    };
-    //verifica se pesquisa é uma string de numeros ou letras
+    var dados = {};
+    //verifica se pesquisa é uma string de numeros
     if (/^\d+$/.test(pesquisa)) {
         const { data: resultadosTelefone, error: erroTelefone } = await req.app.locals.supabase
         .from('clientes')
         .select('*')
-        .or(`telefoneUm.ilike.%${pesquisa}%,telefoneDois.ilike.%${pesquisa}%`);
-        res.send(resultadosTelefone);
-    if (erroTelefone) {
+        .or(`telefone_um.ilike.%${pesquisa}%,telefone_dois.ilike.%${pesquisa}%`)
+        dados = resultadosTelefone;
+        if (erroTelefone) {
         console.error('Erro ao buscar por telefone:', erroTelefone);
         return res.status(500).send('Erro ao buscar por telefone');
     };
     } else {
         try {
-        // Sendo um texto, busca no banco registros cujo nome contém a string digitada na tabela de clientes 
+        // tratamento caso sejam letras
         const { data: resultados, error } = await req.app.locals.supabase
-            .from('clientes')
-            .select('*')
-            .ilike('nome', `%${pesquisa}%`); 
-        //aqui ja tenho em resultados a minha pesquisa
+        .from('clientes')
+        .select('*')
+        .ilike('nome', `%${pesquisa}%`);
+            dados = resultados;
         if (error) {
             console.error('Erro ao buscar dados:', error);
             return res.status(500).send('Erro ao buscar dados');
         };
-        res.send(resultados)
     } catch (err) {
         console.error('Erro inesperado:', err);
-        res.status(500).send('Erro inesperado');
+        return res.status(500).send('Erro inesperado');
     };
     }; 
+    res.json(dados);
 });
+
 router.post('/ordemServico', async (req, res) => {
     postOrdemServicoInst.postOrdemServico(req, res)
 });
+
+
+
 
 
 

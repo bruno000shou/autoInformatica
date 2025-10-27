@@ -5,7 +5,6 @@ const valTelefone = require('./services')
 
 async function postOrdemServico(req, res) {
     const supabase = req.app.locals.supabase;
-
     const data = {
         nome: services.capitalizarNome(req.body.nomeNome),
         telefoneUm: valTelefone.validarTelefone(req.body.nomeTelefoneUm),
@@ -17,8 +16,6 @@ async function postOrdemServico(req, res) {
         valor: req.body.nomeValor || 0,
         observacao: req.body.nomeObservacoes
     };
-                console.log(data.telefoneUm, data.telefoneDois, typeof(data.telefoneUm), typeof(data.telefoneDois))
-
     try {
         //Validação de telefone enviando json para o front caso haja erro
         if (data.telefoneUm === "00000000000" || data.telefoneDois === "00000000000") {  

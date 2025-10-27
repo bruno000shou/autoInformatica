@@ -7,3 +7,6 @@ PAGINA CAIXA
     importante:
 
 
+    separi o end point, agora tem um especifico para enviar o json. POrem nao esta enviando, parece que tem que criar um evento
+    pra que ele seja enviado, tem que pesquisar isso. 
+    
