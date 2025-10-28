@@ -7,14 +7,14 @@ async function postOrdemServico(req, res) {
     const supabase = req.app.locals.supabase;
     const data = {
         nome: services.capitalizarNome(req.body.nomeNome),
-        telefoneUm: valTelefone.validarTelefone(req.body.nomeTelefoneUm),
-        telefoneDois: valTelefone.validarTelefone(req.body.nomeTelefoneDois),
         equipamento: req.body.nomeEquipamento,
         defeito: req.body.nomeDefeito,
         //coloca no valor data a data atual tratada caso o valor do body seja vazio
         dataEntrada: req.body.nomeDataEntrada || new Date().toISOString().split('T')[0],
         valor: req.body.nomeValor || 0,
-        observacao: req.body.nomeObservacoes
+        observacao: req.body.nomeObservacoes,
+        telefone_um: valTelefone.validarTelefone(req.body.nomeTelefoneUm),
+        telefone_dois: valTelefone.validarTelefone(req.body.nomeTelefoneDois)
     };
     try {
         //Validação de telefone enviando json para o front caso haja erro

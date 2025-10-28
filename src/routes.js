@@ -15,7 +15,9 @@ router.get('/ordemServico',  async (req,res) => {
 
 router.get('/api/ordemServico',  async (req,res) => {
     const pesquisa = req.query.nomePesquisaCliente;
+    const searchButton = req.query.searchButton;
     var dados = {};
+
     //verifica se pesquisa é uma string de numeros
     if (/^\d+$/.test(pesquisa)) {
         const { data: resultadosTelefone, error: erroTelefone } = await req.app.locals.supabase
@@ -44,6 +46,44 @@ router.get('/api/ordemServico',  async (req,res) => {
         return res.status(500).send('Erro inesperado');
     };
     }; 
+    res.json(dados);
+});
+
+router.get('/api/ordemServicoCliente', async (req, res) => {
+    const pesquisa = req.query.nomePesquisaCliente;
+    let dados = [];
+
+    if (/^\d+$/.test(pesquisa)) {
+        const { data: resultadosTelefone, error: erroTelefone } = await req.app.locals.supabase
+            .from('ordemservico_view')
+            .select('*')
+            .or(`telefone_um_text.ilike.%${pesquisa}%,telefone_dois_text.ilike.%${pesquisa}%`);
+        
+        dados = resultadosTelefone;
+
+        if (erroTelefone) {
+            console.error('Erro ao buscar por telefone:', erroTelefone);
+            return res.status(500).send('Erro ao buscar por telefone');
+        }
+    } else {
+        try {
+            const { data: resultados, error } = await req.app.locals.supabase
+                .from('ordemservico_view')
+                .select('*')
+                .ilike('nome', `%${pesquisa}%`);
+            
+            dados = resultados;
+
+            if (error) {
+                console.error('Erro ao buscar dados:', error);
+                return res.status(500).send('Erro ao buscar dados');
+            }
+        } catch (err) {
+            console.error('Erro inesperado:', err);
+            return res.status(500).send('Erro inesperado');
+        }
+    }
+
     res.json(dados);
 });
 

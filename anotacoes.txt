@@ -6,8 +6,10 @@ PAGINA CAIXA
 
     importante:
 
-    ja esta funionando a captura de dados dentro do blocks, e armazenando na var divContentAll. Mas esta armazenando tudo,
-    a ideia e pegar o click pelo indice e pelo id. 
+    JA ESTOU COM O VALOR DA DIV EM MAOS, VINDO DO BLOCO COM UM EVENTO DE LISTENING E CLICK NA DIV. 
+    aGORA VAMOS PRECISAR colocar esses valores nas 3 inputs da ordem de servico. e precisamos fazer um if
+    para caso tenha valor nessa div ele inserir, e caso nao tenha manter o valor padrao que ja esta. 
+    
 
    preciso fazer o botao inserir, onde vao preencher os dados da ordem de servico com o que esta nos qudrados. 
 

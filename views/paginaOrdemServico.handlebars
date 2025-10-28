@@ -103,15 +103,17 @@
               <div class="card bg-secondary text-light h-100 p-3 d-flex flex-column">
                 <div class="input-group mb-3">
                   <input type="text" id="pesquisaCliente" name="nomePesquisaCliente"
-                    class="form-control" placeholder="Pesquisar ordem de serviço/cliente">
-                  <button type="button" class="btn btn-primary" id="btnPesquisar">Pesquisar</button>
+                    class="form-control" placeholder="Pesquisar aqui">
+                  <button type="button" class="btn-sm me-3 px-2 py-1 rounded ms-2 btn-primary" 
+                    id="btnPesquisar" name="searchButton" value="cliente"> Cliente</button>
+                  <button type="button" class="btn-sm me-3 px-2 py-1 rounded btn-primary" 
+                    id="btnPesquisarDois" name="searchButton" value="os"> OS</button>
                 </div>
                 <h5 class="text-info mb-3">Resultados da Pesquisa</h5>
                 <div id="searchResultsContainer" class="overflow-auto border rounded bg-dark p-2" style="height: 300px; display: flex; flex-wrap: wrap;">
                   <div id="searchResults"></div>
                 </div>
                 <div class="d-flex justify-content-between mt-3">
-                  <button type="button" class="btn btn-dark">Inserir</button>
                   <button type="button" class="btn btn-warning">Editar</button>
                   <button type="button" class="btn btn-info">Imprimir</button>
                   <button type="button" class="btn btn-danger">Deletar</button>
@@ -127,9 +129,7 @@
 
       </div>
     </div>
- 
-  {{!mensagem de erro ao digitar telefone com formato errado}}
-  <script src="/js/modal.js"></script>
+
   {{!construcao de blocos na div de resultado da pesquisa e captura do valor de pesquisa}}
   <script src="/js/osBlocks.js"></script>
 
