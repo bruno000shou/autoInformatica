@@ -85,11 +85,12 @@
                     </div>
                     <div class="mb-3">
                       <label class="form-label">Observações Detalhadas</label>
-                      <textarea name="nomeObservacoes" class="form-control" rows="3"
+                      <textarea name="nomeObservacoes" id="inputObservacao" class="form-control" rows="3"
                         placeholder="{{#if valores.observacao}}{{valores.observacao}}{{else}}Digite aqui as observações detalhadas...{{/if}}"></textarea>
                     </div>
                     <div class="mb-3">
                       <button type="submit" class="btn btn-primary w-100">Salvar</button>
+                      <button type="button" class="btn btn-warning w-100 mt-4">Editar</button>
                     </div>
                   </div>
                 </div>
@@ -114,7 +115,6 @@
                   <div id="searchResults"></div>
                 </div>
                 <div class="d-flex justify-content-between mt-3">
-                  <button type="button" class="btn btn-warning">Editar</button>
                   <button type="button" class="btn btn-info">Imprimir</button>
                   <button type="button" class="btn btn-danger">Deletar</button>
                 </div>

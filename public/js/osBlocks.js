@@ -11,10 +11,15 @@ window.addEventListener('DOMContentLoaded', () => {
     const inputNome = document.querySelector('input[name="nomeNome"]');
     const inputTelefoneUm = document.querySelector('input[name="nomeTelefoneUm"]');
     const inputTelefoneDois = document.querySelector('input[name="nomeTelefoneDois"]');
-
+    const inputEquipamento = document.querySelector(('input[name="nomeEquipamento"]'));
+    const inputDefeito = document.querySelector(('input[name="nomeDefeito"]'));
+    const inputData = document.querySelector(('input[name="nomeDataEntrada"]'));
+    const inputValor = document.querySelector(('input[name="nomeValor"]'));
+    const inputObservacao = document.querySelector(('textarea[name="nomeObservacoes"]'));
+  
     
     
-    //evento do botão de pesquisar OS na ordem de servico. 
+    //evento do botão de  OS na ordem de servico. 
     btnPesquisarDois.addEventListener('click', async () => {
         const termo = inputPesquisa.value.trim();
          if (!termo) {
@@ -41,14 +46,19 @@ window.addEventListener('DOMContentLoaded', () => {
 
                 div.innerHTML = `
                 <strong>${item.nome}</strong><br>
-                Telefone 1: ${item.telefone_um}<br>
-                Telefone 2: ${item.telefone_dois}
+                Telefone 1: ${item.telefone_um_text}<br>
+                Telefone 2: ${item.telefone_dois_text}
                 `;
 
                 const divContent = {
                     nome: item.nome,
-                    telefone_um: item.telefone_um,
-                    telefone_dois: item.telefone_dois
+                    telefone_um: item.telefone_um_text,
+                    telefone_dois: item.telefone_dois_text,
+                    equipamento : item.equipamento,
+                    defeito : item.defeito,
+                    dataEntrada : item.dataEntrada,
+                    valor : item.valor,
+                    observacao : item.observacao
                 };
 
                 divContentAll.push(divContent);
@@ -75,6 +85,11 @@ window.addEventListener('DOMContentLoaded', () => {
             inputNome.value = conteudo.nome || '';
             inputTelefoneUm.value = conteudo.telefone_um || '';
             inputTelefoneDois.value = conteudo.telefone_dois || '';
+            inputEquipamento.value = conteudo.equipamento ||'';
+            inputDefeito.value = conteudo.defeito ||'';
+            inputData.value = conteudo.dataEntrada ||'';
+            inputValor.value = conteudo.valor ||'';
+            inputObservacao.value = conteudo.observacao ||'';
 
             // 🔹 (opcional) log para depuração
             console.log(`Preenchendo inputs com dados da div ${indexNum}`);
@@ -88,7 +103,7 @@ window.addEventListener('DOMContentLoaded', () => {
     
 
 
-    // evento do botao de pesquisar cliente na ordem de servico
+    // evento do botao de  cliente ,    na pagina de ordem de servico
     btnPesquisar.addEventListener('click', async () => {
         const termo = inputPesquisa.value.trim();
         if (!termo) {

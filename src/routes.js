@@ -8,6 +8,7 @@ router.get('/', (req,res) => {
     res.render('mainPage')
 });
 
+
 // rota da pagina de ordem de servico
 router.get('/ordemServico',  async (req,res) => {
     return res.render('paginaOrdemServico');
@@ -52,7 +53,7 @@ router.get('/api/ordemServico',  async (req,res) => {
 router.get('/api/ordemServicoCliente', async (req, res) => {
     const pesquisa = req.query.nomePesquisaCliente;
     let dados = [];
-
+    
     if (/^\d+$/.test(pesquisa)) {
         const { data: resultadosTelefone, error: erroTelefone } = await req.app.locals.supabase
             .from('ordemservico_view')
