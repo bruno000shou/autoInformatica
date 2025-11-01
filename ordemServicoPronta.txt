@@ -1,0 +1,1 @@
+{"nome":"Bruno Sercundo","telefone_um":"21979748926","telefone_dois":"2125010572","equipamento":"computador gamer","defeito":"liga e não da sinal de video","dataEntrada":"2025-10-23","valor":150,"observacao":"cliente bem chato e reclamao"}

@@ -2,6 +2,8 @@ const express = require('express');
 const app = express();
 const { engine } = require ('express-handlebars');
 const routes = require('./src/routes');
+const fs = require('fs');
+const { print } = require('pdf-to-printer');
 
 //dados e conexão com o banco de dado SUPABASE
 const { createClient } = require('@supabase/supabase-js');

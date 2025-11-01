@@ -6,13 +6,19 @@ PAGINA CAIXA
 
     importante:
 
-    JA ESTOU COM O VALOR DA DIV EM MAOS, VINDO DO BLOCO COM UM EVENTO DE LISTENING E CLICK NA DIV. 
-    aGORA VAMOS PRECISAR colocar esses valores nas 3 inputs da ordem de servico. e precisamos fazer um if
-    para caso tenha valor nessa div ele inserir, e caso nao tenha manter o valor padrao que ja esta. 
+
+    documentar os modulos direitinho com o padrao profissional
+
+    fiz o fetch no arquivo osblocks, pra enviar o conteudo de CONTEUDO para o endpoint de impressao. Agora temos que pegar ele la
+    e testar se estar recebendo, tendo feito isso, passar como parametro para a funcao que ira montar o pdf. pra finalmente montar
+    esse pdf. O arquivo do pdf é createPdfOrdemServico, ele esta de forma bem generica. 
     
+    o fetch do osblocks esta chamando direto o endpoint, e ai carrega tudo e as funcoes, entao so em clicar no bloco da pagina, 
+    ele vai entra em todas as funcoes do endpoint de impressoa e ja tenta imprimir, tem que ver como fazer com que ela aja somente
+    quando apertar o botao de imprimir
 
-   preciso fazer o botao inserir, onde vao preencher os dados da ordem de servico com o que esta nos qudrados. 
+    no end point tem uns RES no try, talves mexa com a renderizacao da pagina. 
 
-   vou precisar de mais um botao de pesquisar os, esse botao vai pesquisar em outra tabela, a de os, e vai ter que renderizar
-    os ao invez de clientes, para usar com os botoes editar, deletar, e imprimir. 
+
+    Ajustar o README
     

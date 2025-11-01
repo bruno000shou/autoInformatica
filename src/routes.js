@@ -1,12 +1,23 @@
 const express = require('express');
 const router = express.Router();
 const { getFormData } = require('./services');
-const postOrdemServicoInst = require('./supabaseServices')
+const fs = require('fs');
+const { print } = require('pdf-to-printer');
+const PDFDocument = require('pdfkit');
+
+
+const postOrdemServicoInst = require('./supabaseServices');
+const osSearchBtn = require('../public/js/ordemServico/osSearchBtn');
+const printOrdemServico = require('../public/js/ordemServico/printOrdemServico')
+const createPdfOrdemServico = require('../public/js/ordemServico/createPdfOrdemServico')
+
+
 
 //rota da pagina principal
 router.get('/', (req,res) => {
     res.render('mainPage')
 });
+
 
 
 // rota da pagina de ordem de servico
@@ -15,39 +26,7 @@ router.get('/ordemServico',  async (req,res) => {
 });
 
 router.get('/api/ordemServico',  async (req,res) => {
-    const pesquisa = req.query.nomePesquisaCliente;
-    const searchButton = req.query.searchButton;
-    var dados = {};
-
-    //verifica se pesquisa é uma string de numeros
-    if (/^\d+$/.test(pesquisa)) {
-        const { data: resultadosTelefone, error: erroTelefone } = await req.app.locals.supabase
-        .from('clientes')
-        .select('*')
-        .or(`telefone_um.ilike.%${pesquisa}%,telefone_dois.ilike.%${pesquisa}%`)
-        dados = resultadosTelefone;
-        if (erroTelefone) {
-        console.error('Erro ao buscar por telefone:', erroTelefone);
-        return res.status(500).send('Erro ao buscar por telefone');
-    };
-    } else {
-        try {
-        // tratamento caso sejam letras
-        const { data: resultados, error } = await req.app.locals.supabase
-        .from('clientes')
-        .select('*')
-        .ilike('nome', `%${pesquisa}%`);
-            dados = resultados;
-        if (error) {
-            console.error('Erro ao buscar dados:', error);
-            return res.status(500).send('Erro ao buscar dados');
-        };
-    } catch (err) {
-        console.error('Erro inesperado:', err);
-        return res.status(500).send('Erro inesperado');
-    };
-    }; 
-    res.json(dados);
+     await osSearchBtn(req, res);
 });
 
 router.get('/api/ordemServicoCliente', async (req, res) => {
@@ -92,7 +71,18 @@ router.post('/ordemServico', async (req, res) => {
     postOrdemServicoInst.postOrdemServico(req, res)
 });
 
-
+router.post('/ordemServico/print', async (req, res) => {
+    const conteudo = req.body;
+    //funcao para criar a ordem de servico precisamos passar as informacoes para dentro dela
+    const arquivoPdf = await createPdfOrdemServico(conteudo);
+    //funcao para imprimir, depois que o arquivo estiver pronto de pdf
+    try {
+        await printOrdemServico(arquivoPdf, res, print);
+    } catch (erro) {
+        console.error('Erro ao imprimir no endpoint /ordemServico/print', erro);
+        res.status(500).json({sucesso: false, message: 'Falha ao imprimir no endpoint /ordemServico/print'});
+    }
+});
 
 
 
