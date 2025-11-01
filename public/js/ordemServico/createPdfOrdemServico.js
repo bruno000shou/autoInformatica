@@ -52,7 +52,9 @@ function gerarPdfOrdemServico(conteudo) {
         }
         doc.moveDown(1);
         doc.text('_____________________________________   _____________________________________', { align: 'center' })
-        doc.text(`                                Cliente ${conteudo.nome || ''}:                                        Informatica.com`);
+        doc.text(`Cliente ${conteudo.nome || ''}`, 130, 300, { continued: true, align: 'left' }).text('Informatica.com', 260, 300);
+        doc.y = 350;
+        doc.x = 50;
       };
 
       escrevePdf(conteudo)

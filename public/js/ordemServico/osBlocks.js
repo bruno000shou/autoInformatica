@@ -2,12 +2,13 @@
 // capturando os dados do input de pesquisa e jogando nos elementos
 
 window.addEventListener('DOMContentLoaded', () => {
+    // Botoes de operacao da pagina ordem de servico
     const inputPesquisa = document.getElementById('pesquisaCliente');
     const btnPesquisar = document.getElementById('btnPesquisar');
     const btnPesquisarDois = document.getElementById('btnPesquisarDois');
     const divResultados = document.getElementById('searchResultsContainer');
 
-    // 🔹 Inputs do formulário principal (onde colocaremos os dados)
+    // Inputs do formulário principal (onde colocaremos os dados)
     const inputNome = document.querySelector('input[name="nomeNome"]');
     const inputTelefoneUm = document.querySelector('input[name="nomeTelefoneUm"]');
     const inputTelefoneDois = document.querySelector('input[name="nomeTelefoneDois"]');
@@ -16,6 +17,8 @@ window.addEventListener('DOMContentLoaded', () => {
     const inputData = document.querySelector(('input[name="nomeDataEntrada"]'));
     const inputValor = document.querySelector(('input[name="nomeValor"]'));
     const inputObservacao = document.querySelector(('textarea[name="nomeObservacoes"]'));
+
+    let conteudoImpressao = {};
   
     
     
@@ -65,58 +68,64 @@ window.addEventListener('DOMContentLoaded', () => {
                 divResultados.appendChild(div);
 
                 // Evento de clique em cada div
-            div.addEventListener('click', () => {
-            // 🔹 Remove o destaque de todas as outras divs
-            document.querySelectorAll('.miniCardsSearch').forEach(el => {
-                el.style.border = '4px solid transparent';
-            });
+                div.addEventListener('click', () => {
+                // Remove o destaque de todas as outras divs
+                    document.querySelectorAll('.miniCardsSearch').forEach(el => {
+                        el.style.border = '4px solid transparent';
+                    });
 
-            // 🔹 Adiciona destaque à div clicada
-            div.style.border = '2px solid #4da6ff';
-            div.style.borderRadius = '6px';
+                    // Adiciona destaque à div clicada
+                    div.style.border = '2px solid #4da6ff';
+                    div.style.borderRadius = '6px';
 
-            // 🔹 Obtém o índice e o conteúdo da div clicada
-            const id = div.id;
-            const indexStr = id.replace('divBlocks', '');
-            const indexNum = parseInt(indexStr);
-            const conteudo = divContentAll[indexNum];
+                    // Obtém o índice e o conteúdo da div clicada
+                    const id = div.id;
+                    const indexStr = id.replace('divBlocks', '');
+                    const indexNum = parseInt(indexStr);
+                    const conteudo = divContentAll[indexNum];
 
-            // 🔹 Preenche os campos do formulário principal
-            inputNome.value = conteudo.nome || '';
-            inputTelefoneUm.value = conteudo.telefone_um || '';
-            inputTelefoneDois.value = conteudo.telefone_dois || '';
-            inputEquipamento.value = conteudo.equipamento ||'';
-            inputDefeito.value = conteudo.defeito ||'';
-            inputData.value = conteudo.dataEntrada ||'';
-            inputValor.value = conteudo.valor ||'';
-            inputObservacao.value = conteudo.observacao ||'';
+                    // Preenche os campos do formulário principal
+                    inputNome.value = conteudo.nome || '';
+                    inputTelefoneUm.value = conteudo.telefone_um || '';
+                    inputTelefoneDois.value = conteudo.telefone_dois || '';
+                    inputEquipamento.value = conteudo.equipamento ||'';
+                    inputDefeito.value = conteudo.defeito ||'';
+                    inputData.value = conteudo.dataEntrada ||'';
+                    inputValor.value = conteudo.valor ||'';
+                    inputObservacao.value = conteudo.observacao ||'';
 
-            //enviando o conteudo da variavel conteudo como json para o endpoint de impressão. 
-            fetch('/ordemServico/print', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(conteudo)
-            })
-            .then(res => res.json())
-            .then(data => {
-            console.log('Resposta do servidor:', data);
-            alert(data.mensagem || 'Operação concluída!');
-            })
-            .catch(err => {
-            console.error('Erro ao enviar dados:', err);
-            });
-         
-        });
-            });          
+                    //enviando o conteudo da variavel conteudo como json para o endpoint de impressão.
+                    conteudoImpressao = conteudo;       
+                });
+            });   
+
         } catch {
             console.error('Erro ao buscar no backend:', err);
             divResultados.textContent = 'Erro ao buscar resultados.';
         };
-    })
+    });
+
+           // Evento para chamar o endpoint de impressao
+            const btnImprimir = document.getElementById("btnImprimir");
+            btnImprimir.replaceWith(btnImprimir.cloneNode(true));
+            document.getElementById("btnImprimir").addEventListener("click", async () => {
+                fetch('/ordemServico/print', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(conteudoImpressao)
+                    })
+                    .then(res => res.json())
+                    .then(data => {
+                    console.log('Resposta do servidor:', data);
+                    alert(data.mensagem || 'Operação concluída!');
+                    })
+                    .catch(err => {
+                    console.error('Erro ao enviar dados:', err);
+                });
+            });  
     
 
-
-    // evento do botao de  cliente ,    na pagina de ordem de servico
+    // evento do botao de  cliente , na pagina de ordem de servico
     btnPesquisar.addEventListener('click', async () => {
         const termo = inputPesquisa.value.trim();
         if (!termo) {

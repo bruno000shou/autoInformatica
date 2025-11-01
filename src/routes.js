@@ -72,15 +72,21 @@ router.post('/ordemServico', async (req, res) => {
 });
 
 router.post('/ordemServico/print', async (req, res) => {
-    const conteudo = req.body;
-    //funcao para criar a ordem de servico precisamos passar as informacoes para dentro dela
-    const arquivoPdf = await createPdfOrdemServico(conteudo);
-    //funcao para imprimir, depois que o arquivo estiver pronto de pdf
     try {
-        await printOrdemServico(arquivoPdf, res, print);
+    const conteudo = req.body;
+    console.log('Conteúdo recebido para impressão:', req.body);
+
+    // Cria o PDF temporário
+    const arquivoPdf = await createPdfOrdemServico(conteudo);
+
+    // Envia para impressão
+    await printOrdemServico(arquivoPdf, print);
+
+    res.json({ sucesso: true, mensagem: 'Impressão enviada com sucesso!' });
+
     } catch (erro) {
-        console.error('Erro ao imprimir no endpoint /ordemServico/print', erro);
-        res.status(500).json({sucesso: false, message: 'Falha ao imprimir no endpoint /ordemServico/print'});
+        console.error('Erro ao imprimir no endpoint /ordemServico/print:', erro);
+        res.status(500).json({ sucesso: false, mensagem: 'Erro ao imprimir: ' + erro.message });
     }
 });
 
