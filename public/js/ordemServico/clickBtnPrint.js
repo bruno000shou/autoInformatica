@@ -1,6 +1,4 @@
-// modulo para o botao de imprimir em ordem de servico chamar o endpoint
-
-
+// MOdulo impressao para o botao imprimir da ordem de servico
 document.getElementById("btnImprimir").addEventListener("click", async () => {
     try {
         // faz a requisição POST

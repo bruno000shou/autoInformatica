@@ -1,14 +1,10 @@
+ //Modulo de criação de pdf temporario para enviar a impressao
 
 const fs = require('fs');
 const path = require('path');
 const PDFDocument = require('pdfkit');
 const os = require('os');
 
-/**
- * Modulo de criação de pdf temporario para enviar a impressao
- * @param {object} conteudo - Dados da OS (cliente, serviço, valor, etc)
- * @returns {promise<string} - Caminho do arquivo de pdf que foi criado
- */
 
 function gerarPdfOrdemServico(conteudo) {
   return new Promise((resolve, reject) => {
@@ -20,14 +16,18 @@ function gerarPdfOrdemServico(conteudo) {
       const writeStream = fs.createWriteStream(arquivoPDF);
       doc.pipe(writeStream);
 
-      function escrevePdf (conteudo){
-        // Cabeçalho
+      let larguraNome = 145;
+      let larguraInfo = 385;
+      function escrevePdf (conteudo, posY){
+        
+        doc.y = posY;
+        doc.x = 40;
+
         doc.font('Times-Bold').fontSize(20).text('Informática.com', { align: 'center' });
         doc.font('Times-Bold').fontSize(20).text('Assistência Técnica venda de acessórios', { align: 'center' });
         doc.font('Times-Roman').fontSize(18).text('Ordem de Serviço nº "colocar elemento id', { align: 'center' });
         doc.moveDown();
 
-        // Dados do cliente
         doc.font('Times-Bold').fontSize(12).text('Cliente: ', { continued: true });
         doc.font('Times-Roman').text(`${conteudo.nome || ''}`, { continued: true });
         doc.font('Times-Bold').text('               Data: ', { continued: true });
@@ -38,7 +38,6 @@ function gerarPdfOrdemServico(conteudo) {
         doc.font('Times-Roman').text(`${conteudo.telefone_dois || ''}`);
         doc.moveDown();
 
-        // Detalhes da ordem
         doc.font('Times-Bold').text('Equipamento deixado: ')
         .font('Times-Roman').text(`${conteudo.equipamento || ''}`);
         doc.font('Times-Bold').text('Defeito reclamado: ')
@@ -51,22 +50,21 @@ function gerarPdfOrdemServico(conteudo) {
           .font('Times-Roman').text(`${conteudo.observacao}`);
         }
         doc.moveDown(1);
-        doc.text('_____________________________________   _____________________________________', { align: 'center' })
-        doc.text(`Cliente ${conteudo.nome || ''}`, 130, 300, { continued: true, align: 'left' }).text('Informatica.com', 260, 300);
-        doc.y = 350;
-        doc.x = 50;
+        const assinaturaY = doc.y + 20;
+        doc.text('_____________________________________   _____________________________________', { align: 'center' });
+        doc.text(`Cliente ${conteudo.nome || ''}`, larguraNome, assinaturaY)
+        .text('Informatica.com', larguraInfo, assinaturaY);
       };
 
-      escrevePdf(conteudo)
+      escrevePdf(conteudo, 50)
       doc.moveDown(3);
-      escrevePdf(conteudo)
+      escrevePdf(conteudo, 410)
 
-      // Finaliza o PDF
       doc.end();
 
       // Aguarda finalização do stream
       writeStream.on('finish', () => {
-        resolve(arquivoPDF); // Retorna o caminho do PDF
+        resolve(arquivoPDF); 
       });
 
       writeStream.on('error', (erro) => {

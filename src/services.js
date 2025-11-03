@@ -1,17 +1,17 @@
-// arquivo que contem os funcoes e operacoes.
+ // modulo que contem funções simples para diversos fins
 
-//funcao para deixar as primeiras letras dos nomes maiusculas
+
 function capitalizarNome(nome) {
   return nome
-    .toLowerCase() // transforma tudo em minúsculas primeiro
-    .split(' ')    // separa as palavras por espaço
-    .filter(palavra => palavra.trim() !== '') // remove espaços extras
-    .map(palavra => palavra[0].toUpperCase() + palavra.slice(1)) // capitaliza
-    .join(' ');    // junta tudo de volta com espaço
+    .toLowerCase()
+    .split(' ')
+    .filter(palavra => palavra.trim() !== '')
+    .map(palavra => palavra[0].toUpperCase() + palavra.slice(1))
+    .join(' ');
 };
 
 
-//função para validar o numeros dos telefones 
+
 function validarTelefone(telefone) {
   // remove tudo que não for dígito
   const apenasNumeros = String(telefone).replace(/\D/g, '');

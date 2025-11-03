@@ -2,7 +2,12 @@
 const services = require('./services');
 const valTelefone = require('./services')
 
-
+/**
+ * @description funcao para inserir dados no banco de dados ordemservico
+ * @param {*} req - objeto passado do endpoint pra manipulação local
+ * @param {*} res - objeto passado do endpoint pra manipulação local
+ * @returns - retorna apenas mensagens de falhas ou sucessos padrão
+ */
 async function postOrdemServico(req, res) {
     const supabase = req.app.locals.supabase;
     const data = {

@@ -1,5 +1,5 @@
-// arquivo responsavel pela criacao dos mini blocos da area de pesquisa da ordem de servico
-// capturando os dados do input de pesquisa e jogando nos elementos
+// MOdulo responsavel pela criação do sminiblocos da area de pesquisa da ordem de serviço
+
 
 window.addEventListener('DOMContentLoaded', () => {
     // Botoes de operacao da pagina ordem de servico
@@ -34,14 +34,13 @@ window.addEventListener('DOMContentLoaded', () => {
             const response = await fetch(`/api/ordemServicoCliente?nomePesquisaCliente=${encodeURIComponent(termo)}`);
             const dados = await response.json();
             let divContentAll = [];
-            divResultados.innerHTML = ''; // Limpa os resultados anteriores
+            divResultados.innerHTML = '';
 
             if (!dados || dados.length === 0) {
                 divResultados.textContent = 'Nenhum resultado encontrado.';
                 return;
             }
 
-            // Criar os blocos de resultados
             dados.forEach((item, index) => {
                 const div = document.createElement('div');
                 div.classList.add('miniCardsSearch');
@@ -69,16 +68,13 @@ window.addEventListener('DOMContentLoaded', () => {
 
                 // Evento de clique em cada div
                 div.addEventListener('click', () => {
-                // Remove o destaque de todas as outras divs
                     document.querySelectorAll('.miniCardsSearch').forEach(el => {
                         el.style.border = '4px solid transparent';
                     });
 
-                    // Adiciona destaque à div clicada
                     div.style.border = '2px solid #4da6ff';
                     div.style.borderRadius = '6px';
 
-                    // Obtém o índice e o conteúdo da div clicada
                     const id = div.id;
                     const indexStr = id.replace('divBlocks', '');
                     const indexNum = parseInt(indexStr);
@@ -94,7 +90,6 @@ window.addEventListener('DOMContentLoaded', () => {
                     inputValor.value = conteudo.valor ||'';
                     inputObservacao.value = conteudo.observacao ||'';
 
-                    //enviando o conteudo da variavel conteudo como json para o endpoint de impressão.
                     conteudoImpressao = conteudo;       
                 });
             });   
@@ -137,7 +132,7 @@ window.addEventListener('DOMContentLoaded', () => {
         const response = await fetch(`/api/ordemServico?nomePesquisaCliente=${encodeURIComponent(termo)}`);
         const dados = await response.json();
         let divContentAll = [];
-        divResultados.innerHTML = ''; // Limpa os resultados anteriores
+        divResultados.innerHTML = '';
 
         if (!dados || dados.length === 0) {
             divResultados.textContent = 'Nenhum resultado encontrado.';
@@ -167,27 +162,24 @@ window.addEventListener('DOMContentLoaded', () => {
 
             // Evento de clique em cada div
             div.addEventListener('click', () => {
-            // 🔹 Remove o destaque de todas as outras divs
             document.querySelectorAll('.miniCardsSearch').forEach(el => {
                 el.style.border = '4px solid transparent';
             });
 
-            // 🔹 Adiciona destaque à div clicada
             div.style.border = '2px solid #4da6ff';
             div.style.borderRadius = '6px';
 
-            // 🔹 Obtém o índice e o conteúdo da div clicada
+            //btém o índice e o conteúdo da div clicada
             const id = div.id;
             const indexStr = id.replace('divBlocks', '');
             const indexNum = parseInt(indexStr);
             const conteudo = divContentAll[indexNum];
 
-            // 🔹 Preenche os campos do formulário principal
+            //Preenche os campos do formulário principal
             inputNome.value = conteudo.nome || '';
             inputTelefoneUm.value = conteudo.telefone_um || '';
             inputTelefoneDois.value = conteudo.telefone_dois || '';
 
-            // 🔹 (opcional) log para depuração
             console.log(`Preenchendo inputs com dados da div ${indexNum}`);
             });
         });

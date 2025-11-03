@@ -1,4 +1,12 @@
-// verifica se o que vem pelo input de pesquisa é num numero ou texto e faz o tratamento inicial 
+
+/**
+ * Modulo que verifica se o que vem pelo input de pesquisa é um numero ou um texto e faz o tratamento inicial desse conteudo
+ * @param {*} req - parametro objeto de requisição do express vindo do endpoint
+ * @param {*} res - parametro objeto de resposta do express vindo do endpoint
+ * @returns {object} - retorna o conteudo pesquisado no banco de dados cliente e devolve como um json que vem da variavel dados
+ */
+
+
 async function osSearchBtn (req, res) {
     const pesquisa = req.query.nomePesquisaCliente;
     const searchButton = req.query.searchButton;

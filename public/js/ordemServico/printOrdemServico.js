@@ -1,4 +1,3 @@
-// modulo para impressao da ordem de servico
 const fs = require('fs');
 
 /**

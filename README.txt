@@ -7,15 +7,14 @@ Pagina ordem de serviço esta pronta, mas as outras páginas estão em lenta con
 =========================
 = ESTRUTURA DE ARQUIVOS =
 =========================
-    O diretório SRC contem os arquivos de rotas do nosso app, assim como controladores.
-    Em VIEWS teremos nossos templates de bootstrap.
-    No diretório PUBLIC teremos modulos e funcções especificas.
+  
+  Colocar a estrutura de arquivos aqui
 
-=============
-= TEMPLATES =
-=============
-    Estamos usando o BOOTSTRAP no projeto, então seus templates estão como padrão, no diretório VIEWS.
+======================
+= TECNOLOGIAS USADAS =
+======================
 
+    Boostrap, handlebars, javascript, html, css, supabase.
 
 ===================
 = BANCO DE DADOS =
@@ -32,7 +31,7 @@ Pagina ordem de serviço esta pronta, mas as outras páginas estão em lenta con
     As tabelas estão organizadas e estruturadas da seguinte forma:
 
     ordemServico: nome:string, telefone_um:bigint, telefone_doi:bigint, equipamento:text, defeito:text, dataEntrada:date, 
-    valorfloat4, observacao:text. Possui uma view onde os campos de telefone são lidos como texto.
+    valorfloat4, observacao:text. Possui uma VIEW onde os campos de telefone são lidos como texto.
 
     clientes: nome:text, telefone_um:text, telefone_dois:text
 
@@ -42,3 +41,40 @@ Pagina ordem de serviço esta pronta, mas as outras páginas estão em lenta con
     Tem como função cadastrar, editar, imprimir e deletar ordens de servico. É possivel pesquisar as ordens de servico por nome ou por
     telefone, tembem podemos pesquisar clientes cadastrados para serem utitlizados na criação da ordem de serviço. 
 
+
+    ===================
+    = /src/services.js=
+    ===================
+        Modulo que contem funcoes diversas para varios fins.
+        - capitalizarNome - funcao pra colocar a primeira letra de cada nome maiuscula.
+        - validarTelefone - função para validar o numeros dos telefones verificando se sao caracteres numericos apenas.
+
+
+    ===========================
+    = /src/supabaseServices.js=
+    ===========================
+        arquivo para conter as manipulacoes do supabase como um todo
+        - postOrdemServico - insere dados no banco de dados ordemservico apos validação e tratamento de dados
+
+    ===========================================
+    = public\js\ordemServico\clickBtnPrint.js =
+    ===========================================
+        Modulo para o botão de imprimir em ordem de serviço chamar o endpoint
+
+    ==================================================
+    = public\js\ordemServico\createPdfOrdemServico.js=
+    ==================================================
+        Modulo de criação de pdf temporario para enviar a impressao
+        - gerarPdfOrdemServico - funcao responsavel por toda criacao e exportacao do caminho do pdf
+
+    =====================================
+    = public\js\ordemServico\osBlocks.js=
+    =====================================
+         MOdulo responsavel pela criação do sminiblocos da area de pesquisa da ordem de serviço
+         - O primeiro evento é referente  ao botão de  OS na ordem de servico, envia para o back end o que foi pesquisado no botão de cliente
+        e cria para cara retorno do back end um bloco com os dados (nome, telefone_um e telefone_dois). Após isso, cria um evento de 
+        click nas divs criadas, e alimenta os campos do formulário com o conteudo dessas divs. 
+        - temos um evento de click no botao de imprimir onde chamamos o endpoint '/ordemServico/print' e enviamos o json com o 
+        conteudo que sera impresso. 
+        - abaixo temos um evento de captura para a pesquisa e consulta no banco de dados ordemservico, onde criaremos os blocos
+        e alimentaremos os campos do formulario com todo o conteudo do elemento clicado nas divs criadas
